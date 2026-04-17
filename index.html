@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In the Hot Seat - Ice Breaker Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" role="main">
+        <div class="language-toggle">
+            <button id="langBtn" class="btn-lang" aria-label="Switch language">
+                <span id="langIcon">🌐</span> <span id="langText">DE</span>
+            </button>
+        </div>
+        <header id="gameHeader">
+            <h1 class="title" data-i18n="title">Ice Breaker <span role="img" aria-label="ice cube">🧊</span></h1>
+            <h2 class="main-title"><span data-i18n="mainTitle">In the hot seat</span> <span class="fire" role="img" aria-label="fire">🔥</span></h2>
+            <ul class="subtitle-list">
+                <li data-i18n="rule1" class="home-only">Each participant gets 30 seconds on the timer</li>
+                <li data-i18n="rule2" class="home-only">Answer as many questions as possible</li>
+                <li data-i18n="rule3" class="home-only">There will either be a multiple choice question or an open-ended question</li>
+                <li data-i18n="rule4" class="home-only">Most answers wins</li>
+                <li data-i18n="rule5">Say/speak your answer out loud 🗣️</li>
+            </ul>
+        </header>
+
+        <div id="nameInput" class="name-input">
+            <label for="playerName" class="input-label" data-i18n="enterName">Enter your name:</label>
+            <input type="text" id="playerName" class="text-input" data-i18n-placeholder="namePlaceholder" placeholder="Your name" maxlength="20" aria-required="true">
+            <p class="timer-info" data-i18n="timerInfo">Timer starts when you click 'Start Game'</p>
+            <button id="startBtn" class="btn btn-start" data-i18n="startGame" aria-label="Start game with 30 second timer">Start Game</button>
+            <button id="viewLeaderboardBtn" class="btn btn-secondary" data-i18n="viewLeaderboard" aria-label="View leaderboard of all players">View Leaderboard</button>
+        </div>
+
+        <div class="game-controls hidden" id="gameControls" aria-live="polite">
+            <div class="player-info">
+                <span class="player-label" data-i18n="player">Player:</span>
+                <span id="currentPlayer" class="player-name" aria-label="Current player"></span>
+            </div>
+            <div id="timer" class="timer" role="timer" aria-live="assertive" aria-atomic="true">
+                <div class="timer-display">
+                    <span id="timeLeft" aria-label="Time remaining">30</span>
+                    <span class="timer-label" data-i18n="seconds">seconds</span>
+                </div>
+            </div>
+            <div id="score" class="score" aria-live="polite" aria-atomic="true">
+                <span class="score-label" data-i18n="questionsAnswered">Questions answered:</span>
+                <span id="scoreCount" aria-label="Number of answers">0</span>
+            </div>
+        </div>
+
+        <div id="questionCard" class="question-card hidden" role="region" aria-label="Question choices">
+            <div class="question-type-label" id="questionTypeLabel"></div>
+            <div class="question-content" role="group" aria-label="Choose your answer">
+                <button class="question-box left clickable" id="choiceLeft" role="button" aria-pressed="false" tabindex="0">
+                    <span id="questionLeft" class="question-text"></span>
+                    <span class="selected-indicator" aria-hidden="true" data-i18n="selected">✓ Selected</span>
+                </button>
+                <div class="divider" aria-hidden="true" data-i18n="or">or</div>
+                <button class="question-box right clickable" id="choiceRight" role="button" aria-pressed="false" tabindex="0">
+                    <span id="questionRight" class="question-text"></span>
+                    <span class="selected-indicator" aria-hidden="true" data-i18n="selected">✓ Selected</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="results" class="results hidden" role="region" aria-live="polite">
+            <h2 class="results-title" data-i18n="gameOver">Game Over!</h2>
+            <p class="results-score"><span id="finalPlayerName" class="highlight-red"></span> <span data-i18n="answered">answered</span> <span id="finalScore" class="highlight-red">0</span> <span data-i18n="questions">questions</span></p>
+
+            <div class="leaderboard">
+                <h3 class="leaderboard-title"><span role="img" aria-label="trophy">🏆</span> <span data-i18n="leaderboard">Leaderboard</span></h3>
+                <div id="leaderboardList" class="leaderboard-list" role="list" aria-label="Player scores"></div>
+                <button id="clearLeaderboardBtn" class="btn btn-clear" data-i18n="clearLeaderboard" aria-label="Permanently clear all leaderboard data">Clear Leaderboard Data</button>
+            </div>
+
+            <button id="playAgainBtn" class="btn btn-start" data-i18n="playAgain" aria-label="Start a new game">Play Again</button>
+        </div>
+
+        <div id="leaderboardView" class="leaderboard-view hidden" role="region" aria-label="Leaderboard">
+            <h2 class="results-title"><span role="img" aria-label="trophy">🏆</span> <span data-i18n="leaderboard">Leaderboard</span></h2>
+
+            <div class="leaderboard">
+                <div id="leaderboardListView" class="leaderboard-list" role="list" aria-label="Player scores"></div>
+                <button id="clearLeaderboardViewBtn" class="btn btn-clear" data-i18n="clearLeaderboard" aria-label="Permanently clear all leaderboard data">Clear Leaderboard Data</button>
+            </div>
+
+            <button id="backToHomeBtn" class="btn btn-start" data-i18n="backToHome" aria-label="Return to home screen">Back to Home</button>
+        </div>
+
+    <!-- Screen reader announcements -->
+    <div id="srAnnouncements" class="sr-only" role="status" aria-live="assertive" aria-atomic="true"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
